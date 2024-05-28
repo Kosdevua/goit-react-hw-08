@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
 
 const initialState = {
@@ -7,30 +7,53 @@ const initialState = {
   error: null,
 };
 
-const contactsSlice = createSlice({
+export const contactsSlice = createSlice({
   name: "contacts",
   initialState,
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchContacts.pending, (state) => {
-        state.isLoading = true;
+  extraReducers: (bilder) => {
+    bilder
+      .addCase(fetchContacts.fulfilled, (state, { payload }) => {
+        state.items = payload;
       })
-      .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.items = action.payload;
+      .addCase(addContact.fulfilled, (state, { payload }) => {
+        state.items.push(payload);
       })
-      .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-        state.error = action.payload;
+      .addCase(deleteContact.fulfilled, (state, { payload }) => {
+        state.items = state.items.filter((contact) => contact.id !== payload);
       })
-      .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push(action.payload);
-      })
-      .addCase(deleteContact.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          (contact) => contact.id !== action.payload
-        );
-      });
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.pending,
+          deleteContact.pending,
+          addContact.pending
+        ),
+        (state) => {
+          state.isLoading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.rejected,
+          deleteContact.rejected,
+          addContact.rejected
+        ),
+        (state) => {
+          state.isLoading = false;
+          state.error = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchContacts.fulfilled,
+          deleteContact.fulfilled,
+          addContact.fulfilled
+        ),
+        (state) => {
+          state.isLoading = false;
+          state.error = null;
+        }
+      );
   },
 });
 

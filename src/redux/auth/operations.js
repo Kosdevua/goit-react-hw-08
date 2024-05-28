@@ -65,3 +65,4 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+export const selectUserEmail = createAsyncThunk();

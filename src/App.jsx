@@ -1,21 +1,21 @@
-// src/App.jsx
-import { Routes, Route } from "react-router-dom";
 import { lazy, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route } from "react-router-dom";
 import { refreshUser } from "./redux/auth/operations";
-import { useAuth } from "./hooks/useAuth"; // Імпорт хука
-import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
+import Layout from "./components/Layout/Layout";
+const RegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/RegistrationPage")
+);
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+import { selectIsRefreshing } from "./redux/auth/selectors";
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 
-const HomePage = lazy(() => import("./pages/HomePage"));
-const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage"));
-const ContactsPage = lazy(() => import("./pages/ContactsPage"));
-
-export const App = () => {
+const App = () => {
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth(); // Використання хука
+  const { isRefreshing } = useSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -24,9 +24,11 @@ export const App = () => {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+    <Layout>
+      <Routes>
+        {/* <Route path="/" element={<Layout />}> */}
+
+        <Route path="/" element={<HomePage />} />
         <Route
           path="/register"
           element={
@@ -48,7 +50,10 @@ export const App = () => {
             <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
           }
         />
-      </Route>
-    </Routes>
+
+        {/* </Route> */}
+      </Routes>
+    </Layout>
   );
 };
+export default App;

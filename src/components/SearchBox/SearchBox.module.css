@@ -1,0 +1,15 @@
+.searchInput {
+  margin-top: 20px;
+  font-size: 18px;
+  border-color: brown;
+  border: 1px solid rgb(37, 37, 37);
+  border-radius: 5px;
+  padding: 5px 2px;
+}
+
+.search_wrapper {
+  width: 365px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}

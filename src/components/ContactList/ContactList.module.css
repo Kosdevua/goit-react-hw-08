@@ -1,0 +1,7 @@
+.contacts_list {
+  margin-top: 20px;
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}

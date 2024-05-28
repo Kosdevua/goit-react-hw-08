@@ -1,0 +1,27 @@
+.form_wrapper {
+  box-sizing: border-box;
+  border: 1px solid #000;
+  padding: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  /* background-color: rebeccapurple; */
+  width: 365px;
+  gap: 10px;
+  border-radius: 5px;
+}
+.form_wrapper button {
+  font-size: 18px;
+  width: 130px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.form_wrapper input {
+  font-size: 18px;
+  /* background-color: black; */
+}
+.error_message {
+  color: rgb(196, 0, 0);
+}

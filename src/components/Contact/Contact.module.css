@@ -1,0 +1,29 @@
+.contact_wrapper {
+  box-sizing: border-box;
+  width: calc(((100% - 72px) / 4));
+  border-color: aqua;
+  padding: 20px 10px;
+  font-size: 18px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contact_data {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.contact_data span {
+  margin-right: 5px;
+}
+
+.contact_btn {
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 18px;
+  padding: 10px;
+  /* background-color: lightcoral; */
+}

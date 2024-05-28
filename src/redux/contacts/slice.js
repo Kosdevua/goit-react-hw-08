@@ -1,52 +1,37 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
-import {
-  fetchContacts,
-  addContact,
-  deleteContact,
-} from "../contacts/operations";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts, addContact, deleteContact } from "./operations";
 
 const initialState = {
-  contacts: [],
-  loading: false,
+  items: [],
+  isLoading: false,
   error: null,
 };
 
-const contactSlice = createSlice({
+const contactsSlice = createSlice({
   name: "contacts",
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, (state) => {
-        state.loading = true; // встановлення стану завантаження
+        state.isLoading = true;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.loading = false;
-        state.contacts = action.payload; // зберігання отриманих контактів
+        state.isLoading = false;
+        state.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload; // зберігання помилки
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.contacts.push(action.payload); // додавання нового контакту
+        state.items.push(action.payload);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
-        state.contacts = state.contacts.filter(
+        state.items = state.items.filter(
           (contact) => contact.id !== action.payload
-        ); // видалення контакту
+        );
       });
   },
 });
 
-export const selectContacts = (state) => state.contacts.contacts;
-export const contactReducer = contactSlice.reducer;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, (state) => state.filter.filter],
-  (contacts, filter) => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  }
-);
+export default contactsSlice.reducer;

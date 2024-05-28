@@ -1,51 +1,56 @@
-import { Field, Form, Formik, ErrorMessage } from "formik";
-import * as yup from "yup";
 import s from "./ContactForm.module.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contacts/operations";
+import { addContactsThunk } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const FeedbackSchema = yup.object().shape({
-    name: yup
-      .string()
-      .required("Required")
-      .min(3, "Too short")
-      .max(50, "Too long")
-      .trim(),
-    number: yup
-      .string()
-      .required("Required")
-      .min(3, "Too short")
-      .max(50, "Too long")
-      .trim(),
+  const initialValues = {
+    name: "",
+    number: "",
+  };
+
+  const handleSubmit = (values, actions) => {
+    dispatch(addContactsThunk(values));
+    actions.resetForm();
+  };
+
+  const FeedbackSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(3, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+    number: Yup.string()
+      .min(3, "Too Short!")
+      .max(10, "Too Long!")
+      .required("Required"),
   });
 
   return (
     <Formik
-      initialValues={{ name: "", number: "" }}
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
-      onSubmit={(values, actions) => {
-        dispatch(addContact(values));
-        actions.resetForm();
-      }}
     >
-      <Form className={s.form_wrapper}>
-        <label htmlFor="name">Name</label>
-        <Field type="text" name="name" />
-        <ErrorMessage
-          className={s.error_message}
-          name="name"
-          component="span"
-        />
-        <label htmlFor="number">Number</label>
-        <Field type="text" name="number" />
-        <ErrorMessage
-          className={s.error_message}
-          name="number"
-          component="span"
-        />
+      <Form className={s.form}>
+        <div>
+          <label htmlFor="name">{"Name*"}</label>
+          <Field type="text" name="name" id="name" autoComplete="false" />
+          <ErrorMessage name="name" component="span" className={s.error} />
+        </div>
+        <div>
+          <label htmlFor="number">{"Number*"}</label>
+          <Field
+            type="phone"
+            name="number"
+            id="number"
+            autoComplete="false"
+            className={s.number}
+          />
+          <ErrorMessage name="number" component="span" className={s.error} />
+        </div>
         <button type="submit">Add contact</button>
       </Form>
     </Formik>

@@ -6,6 +6,10 @@ import { selectFilteredContacts } from "../../redux/contacts/slice";
 const ContactList = () => {
   const contacts = useSelector(selectFilteredContacts);
 
+  if (!contacts.length) {
+    return <h1 className={s.title}> No contacts</h1>;
+  }
+
   return (
     <ul className={s.contacts_list}>
       {contacts.map((contact) => (

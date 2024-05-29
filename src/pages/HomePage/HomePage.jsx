@@ -4,9 +4,8 @@ const HomePage = () => {
   return (
     // className={s.container}
     <div>
-      <h1 className={s.title}>Welcome to the Phonebook App</h1>
-      {/* className={s.description} */}
-      <p>This application allows you to manage your contacts efficiently.</p>
+      <h1 className={s.title}>Contact book application</h1>
+      <p className={s.description}>Create a username and using phone number</p>
     </div>
   );
 };

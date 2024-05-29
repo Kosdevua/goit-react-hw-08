@@ -5,3 +5,9 @@
   flex-direction: row;
   gap: 24px;
 }
+
+.title {
+  color: rgb(116, 88, 88);
+  margin: 10px 0;
+  font-size: 18px;
+}

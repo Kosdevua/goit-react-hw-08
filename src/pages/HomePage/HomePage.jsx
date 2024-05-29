@@ -5,7 +5,7 @@ const HomePage = () => {
     // className={s.container}
     <div className={s.wrapper}>
       <h1 className={s.title}>Contact book application</h1>
-      <p className={s.description}>Create a username and using phone number</p>
+      <p className={s.description}>Create your own contact list</p>
     </div>
   );
 };

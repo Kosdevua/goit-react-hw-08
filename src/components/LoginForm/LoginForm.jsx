@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import { login } from "../../redux/auth/operations";
+import s from "./LoginForm.module.css";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ export const LoginForm = () => {
     e.preventDefault();
     const form = e.currentTarget;
     dispatch(
-      logIn({
+      login({
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
@@ -23,7 +24,7 @@ export const LoginForm = () => {
     form.reset();
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={s.form} onSubmit={handleSubmit}>
       <label>
         Email
         <input type="email" name="email" />

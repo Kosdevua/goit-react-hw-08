@@ -2,7 +2,7 @@ import s from "./ContactForm.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addContactsThunk } from "../../redux/contacts/operations";
+import { addContact } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const ContactForm = () => {
   };
 
   const handleSubmit = (values, actions) => {
-    dispatch(addContactsThunk(values));
+    dispatch(addContact(values));
     actions.resetForm();
   };
 
@@ -34,11 +34,15 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
-      <Form className={s.form}>
+      <Form className={s.form_wrapper}>
         <div>
           <label htmlFor="name">{"Name*"}</label>
           <Field type="text" name="name" id="name" autoComplete="false" />
-          <ErrorMessage name="name" component="span" className={s.error} />
+          <ErrorMessage
+            name="name"
+            component="span"
+            className={s.error_message}
+          />
         </div>
         <div>
           <label htmlFor="number">{"Number*"}</label>
@@ -49,7 +53,11 @@ const ContactForm = () => {
             autoComplete="false"
             className={s.number}
           />
-          <ErrorMessage name="number" component="span" className={s.error} />
+          <ErrorMessage
+            name="number"
+            component="span"
+            className={s.error_message}
+          />
         </div>
         <button type="submit">Add contact</button>
       </Form>

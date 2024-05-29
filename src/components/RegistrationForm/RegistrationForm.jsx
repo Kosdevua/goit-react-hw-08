@@ -24,6 +24,7 @@ export const RegistrationForm = () => {
       });
     form.reset();
   };
+
   return (
     <form className={s.form} onSubmit={handleSubmit}>
       <label className={s.label}>

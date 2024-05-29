@@ -3,9 +3,15 @@
   justify-content: space-between;
 }
 .user_name {
-  color: red;
+  margin-top: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: #cccccc;
+  color: #050505;
+  padding: 10px 20px;
 }
 .button {
+  margin-top: 10px;
   padding: 10px 20px;
   font-size: 16px;
   color: #fff;
@@ -13,7 +19,7 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.25s ease-in-out;
 }
 
 .button:hover {

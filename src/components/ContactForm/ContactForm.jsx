@@ -36,7 +36,7 @@ const ContactForm = () => {
     >
       <Form className={s.form_wrapper}>
         <div>
-          <label htmlFor="name">{"Name*"}</label>
+          <label htmlFor="name">{"Name"}</label>
           <Field type="text" name="name" id="name" autoComplete="false" />
           <ErrorMessage
             name="name"
@@ -45,7 +45,7 @@ const ContactForm = () => {
           />
         </div>
         <div>
-          <label htmlFor="number">{"Number*"}</label>
+          <label htmlFor="number">{"Number"}</label>
           <Field
             type="phone"
             name="number"

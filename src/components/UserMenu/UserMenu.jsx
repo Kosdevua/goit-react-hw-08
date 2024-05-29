@@ -13,7 +13,7 @@ const UserMenu = () => {
   return (
     //className={s.userMenu}
     <div className={s.wrapper}>
-      <span className={s.user_name}>Welcome, {user.name}!!</span>
+      <span className={s.user_name}>Welcome, {user.name}.</span>
       <button className={s.button} onClick={() => dispatch(logout())}>
         Logout
       </button>
